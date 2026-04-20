@@ -1,16 +1,26 @@
-# This is a sample Python script.
+from tkinter import *
 
-# Press Ctrl+F5 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+BACKGROUND_COLOR = "#B1DDC6"
+
+window = Tk()
+window.title("Flashy")
+window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
+
+canvas = Canvas(height=526, width=800)
+card_front_img = PhotoImage(file="./images/card_front.png")
+canvas.create_image(400, 263, image=card_front_img)
+canvas.create_text(400, 150, text="Title", font=("Ariel", 40, "italic"))
+canvas.create_text(400, 263, text="Answer", font=("Ariel", 60, "bold"))
+canvas.config(bg=BACKGROUND_COLOR, highlightthickness=0)
+canvas.grid(row=0, column=0, columnspan=2)
+
+cross_img = PhotoImage(file="./images/wrong.png")
+unknown_button = Button(image=cross_img)
+unknown_button.grid(row=1, column=0)
+
+check_image = PhotoImage(file="./images/right.png")
+known_button = Button(image=check_image)
+known_button.grid(row=1, column=1)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+window.mainloop()
