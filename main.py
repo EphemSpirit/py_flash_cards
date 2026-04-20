@@ -9,16 +9,17 @@ cards = data.to_dict(orient="records")
 current_card = {}
 
 def show_card():
-    global current_card
+    global current_card, flip_timer
+    window.after_cancel(flip_timer)
     canvas.itemconfig(card_canvas_image, image=card_front_img)
     current_card = random.choice(cards)
-    canvas.itemconfig(card_title, text="French")
-    canvas.itemconfig(card_word, text=current_card["French"])
-    window.after(3000, flip_card)
+    canvas.itemconfig(card_title, text="French", fill="black")
+    canvas.itemconfig(card_word, text=current_card["French"], fill="black")
+    flip_timer = window.after(3000, func=flip_card)
 
 def flip_card():
-    canvas.itemconfig(card_title, text="English")
-    canvas.itemconfig(card_word, text=current_card["English"])
+    canvas.itemconfig(card_title, text="English", fill="white")
+    canvas.itemconfig(card_word, text=current_card["English"], fill="white")
     canvas.itemconfig(card_canvas_image, image=card_back_img)
 
 
@@ -26,7 +27,7 @@ window = Tk()
 window.title("Flashy")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
-window.after(3000, func=flip_card)
+flip_timer = window.after(3000, func=flip_card)
 
 
 canvas = Canvas(height=526, width=800)
